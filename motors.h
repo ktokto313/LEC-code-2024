@@ -6,12 +6,12 @@
 #define MAX_PWM 4095
 
 // PCA9685 PWM channels 0-16
-#define MOTOR_RIGHT_CONTROL 1
-#define MOTOR_LEFT_CONTROL 2
+#define MOTOR_RIGHT_CONTROL 4
+#define MOTOR_LEFT_CONTROL 7
 
 // Arduino channel
-#define MOTOR_RIGHT_FORWARD 2
-#define MOTOR_RIGHT_BACKWARD 3
+#define MOTOR_RIGHT_FORWARD 6
+#define MOTOR_RIGHT_BACKWARD 7
 #define MOTOR_LEFT_FORWARD 4
 #define MOTOR_LEFT_BACKWARD 5
 
@@ -51,11 +51,15 @@ int getServoPWM(int milisec) {
 
 void initMotors()
 {
+  Serial.println("1");
   Wire.begin();
+  Serial.println("2");
 
   pwm.resetDevices();
+  Serial.println("3");
 
   pwm.init();
+  Serial.println("4");
 
   pwm.setPWMFrequency(50);
 

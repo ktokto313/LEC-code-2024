@@ -34,9 +34,21 @@ bool PS2control()
       speed = NORM_SPEED;
     }
   }
-  
 
-  int nJoyX = 128 - ps2x.Analog(PSS_RY); // read x-joystick
+  int servo = 0;
+  if (ps2x.Button(PSB_GREEN)) {
+    // Go up
+    Serial.println("Going up");
+    servo = 200;
+  } else if (ps2x.Button(PSB_BLUE)) {
+    // Go down
+    Serial.println("Going down");
+    servo = 400;
+  }
+  pwm.setChannelPWM(0, servo);
+  pwm.setChannelPWM(1, 600 - servo);
+
+  int nJoyX = 127 - ps2x.Analog(PSS_RY); // read x-joystick
   int nJoyY = 128 - ps2x.Analog(PSS_LX); // read y-joystick
   int nMotMixL;                          // Motor (left) mixed output
   int nMotMixR;                          // Motor (right) mixed output
@@ -55,6 +67,12 @@ bool PS2control()
 
   nMotMixL = map(nMotMixL, -128, 128, -speed, speed);
   nMotMixR = map(nMotMixR, -128, 128, -speed, speed);
+
+  // int test = map(nMotMixL, -128, 128, 100, 500);
+  // Serial.println(test);
+  // pwm.setChannelPWM(0, test);
+  // pwm.setChannelPWM(1, 600 - test);
+
 
   setPWMMotors(nMotMixR, nMotMixL);
   return 1;

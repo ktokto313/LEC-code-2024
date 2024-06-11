@@ -4,6 +4,7 @@
 void setup()
 {
   Serial.begin(115200);
+  Serial.println("Starting up");
   initMotors();
   setupPS2controller();
   Serial.println("Done setup!");
