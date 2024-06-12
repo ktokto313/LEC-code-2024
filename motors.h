@@ -19,9 +19,9 @@ PCA9685 pwm;
 
 void setPWMMotors(int c1, int c2)
 {
-  char dbg_str[30];
-  sprintf(dbg_str,"C1: %d\tC2: %d",c1,c2);
-  Serial.println(dbg_str);
+  // char dbg_str[30];
+  // sprintf(dbg_str,"C1: %d\tC2: %d",c1,c2);
+  // Serial.println(dbg_str);
 
   //true = 1
   //false = 0
