@@ -23,23 +23,13 @@ void setPWMMotors(int c1, int c2)
   sprintf(dbg_str,"C1: %d\tC2: %d",c1,c2);
   Serial.println(dbg_str);
 
-  if (c1 > 0)
-  {
-    digitalWrite(MOTOR_RIGHT_FORWARD, HIGH);
-    digitalWrite(MOTOR_RIGHT_BACKWARD, LOW);
-  } else { //c1 < 0
-    digitalWrite(MOTOR_RIGHT_FORWARD, LOW);
-    digitalWrite(MOTOR_RIGHT_BACKWARD, HIGH);
-  }
+  //true = 1
+  //false = 0
+  digitalWrite(MOTOR_RIGHT_FORWARD, c1 > 0);
+  digitalWrite(MOTOR_RIGHT_BACKWARD, !(c1 > 0));
 
-  if (c2 > 0){
-    digitalWrite(MOTOR_LEFT_FORWARD, HIGH);
-    digitalWrite(MOTOR_LEFT_BACKWARD, LOW);
-  }
-  else { //c2 < 0
-    digitalWrite(MOTOR_LEFT_FORWARD, LOW);
-    digitalWrite(MOTOR_LEFT_BACKWARD, HIGH);
-  }
+  digitalWrite(MOTOR_LEFT_FORWARD, c2 > 0);
+  digitalWrite(MOTOR_LEFT_BACKWARD, !(c2 > 0));
 
   pwm.setChannelPWM(MOTOR_RIGHT_CONTROL, abs(c1));
   pwm.setChannelPWM(MOTOR_LEFT_CONTROL, abs(c2));
